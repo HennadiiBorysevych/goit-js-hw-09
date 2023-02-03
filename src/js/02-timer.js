@@ -24,26 +24,29 @@ const options = {
       clearInterval(timerId);
     } else {
       btnStart.removeAttribute('disabled');
+      handleTimerStart(startTime);
     }
-
-    btnStart.addEventListener('click', () => {
-      clearInterval(timerId);
-
-      timerId = setInterval(() => {
-        const currentTime = Date.now();
-
-        const timeDifference = currentTime - startTime;
-        const timeConverted = convertMs(timeDifference);
-        console.log(timeConverted);
-
-        days.textContent = Math.abs(timeConverted.days);
-        hours.textContent = Math.abs(timeConverted.hours);
-        minutes.textContent = Math.abs(timeConverted.minutes);
-        seconds.textContent = Math.abs(timeConverted.seconds);
-      }, 1000);
-    });
   },
 };
+
+function handleTimerStart(time) {
+  btnStart.addEventListener('click', () => {
+    clearInterval(timerId);
+
+    timerId = setInterval(() => {
+      const currentTime = Date.now();
+
+      const timeDifference = currentTime - time;
+      const timeConverted = convertMs(timeDifference);
+      console.log(timeConverted);
+
+      days.textContent = Math.abs(timeConverted.days);
+      hours.textContent = Math.abs(timeConverted.hours);
+      minutes.textContent = Math.abs(timeConverted.minutes);
+      seconds.textContent = Math.abs(timeConverted.seconds);
+    }, 1000);
+  });
+}
 
 const picker = flatpickr('#datetime-picker', options);
 
