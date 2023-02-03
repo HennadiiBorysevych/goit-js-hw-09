@@ -1,0 +1,19 @@
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5c6ac4;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #7d8cf0;
+}
+
+button[disabled] {
+    background-color: #ccc;
+    cursor: default;
+}
