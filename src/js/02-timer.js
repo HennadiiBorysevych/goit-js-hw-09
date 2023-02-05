@@ -9,6 +9,7 @@ const minutes = document.querySelector('span[data-minutes]');
 const seconds = document.querySelector('span[data-seconds]');
 
 let timerId = null;
+btnStart.setAttribute('disabled', 'true');
 
 const options = {
   enableTime: true,
@@ -19,8 +20,9 @@ const options = {
     const startTime = selectedDates[0].getTime();
 
     if (startTime - Date.now() < 0) {
-      Notify.info('Please choose a date in the future');
       btnStart.setAttribute('disabled', 'true');
+
+      Notify.info('Please choose a date in the future');
       clearInterval(timerId);
     } else {
       btnStart.removeAttribute('disabled');
@@ -37,13 +39,18 @@ function handleTimerStart(time) {
       const currentTime = Date.now();
 
       const timeDifference = currentTime - time;
-      const timeConverted = convertMs(timeDifference);
+      const timeConverted = convertMs(Math.abs(timeDifference));
       console.log(timeConverted);
 
-      days.textContent = Math.abs(timeConverted.days);
-      hours.textContent = Math.abs(timeConverted.hours);
-      minutes.textContent = Math.abs(timeConverted.minutes);
-      seconds.textContent = Math.abs(timeConverted.seconds);
+      days.textContent = timeConverted.days;
+      hours.textContent = timeConverted.hours;
+      minutes.textContent = timeConverted.minutes;
+      seconds.textContent = timeConverted.seconds;
+
+      if (timeDifference >= 0) {
+        clearInterval(timerId);
+        Notify.info('Time is up');
+      }
     }, 1000);
   });
 }
