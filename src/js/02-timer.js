@@ -22,7 +22,7 @@ const options = {
     if (startTime - Date.now() < 0) {
       btnStart.setAttribute('disabled', 'true');
 
-      Notify.info('Please choose a date in the future');
+      Notify.failure('Please choose a date in the future');
       clearInterval(timerId);
     } else {
       btnStart.removeAttribute('disabled');
@@ -33,6 +33,8 @@ const options = {
 
 function handleTimerStart(time) {
   btnStart.addEventListener('click', () => {
+    btnStart.setAttribute('disabled', 'true');
+
     clearInterval(timerId);
 
     timerId = setInterval(() => {

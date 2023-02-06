@@ -33,12 +33,3 @@ form.addEventListener('submit', e => {
   }
   e.currentTarget.reset();
 });
-function largestPairSum(numbers) {
-  return [...numbers]
-    .sort((a, b) => a - b)
-    .reduce((sum, l, i, a) => {
-      sum = a[a.length - 1] + a[a.length - 2];
-      return sum;
-    }, 0);
-}
-console.log(largestPairSum([-10, -8, -16, -18, -19]));
